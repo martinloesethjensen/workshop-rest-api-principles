@@ -27,8 +27,6 @@ public class TodoController {
     // -------------------------------------------------------------------------
     // Return all todos. Support optional filtering via ?status=OPEN|IN_PROGRESS|DONE
     // Response: 200 OK with a list of TodoDto (empty list [] if none found)
-    //
-    // Hint: ResponseEntity.ok(todoService.findAll(status))
     // -------------------------------------------------------------------------
     @GetMapping
     public ResponseEntity<List<TodoDto>> getAllTodos(
@@ -41,8 +39,6 @@ public class TodoController {
     // -------------------------------------------------------------------------
     // Return a single todo by its id.
     // Response: 200 OK with the TodoDto, or 404 if not found (handled globally)
-    //
-    // Hint: ResponseEntity.ok(todoService.findById(id))
     // -------------------------------------------------------------------------
     @GetMapping("/{id}")
     public ResponseEntity<TodoDto> getTodoById(@PathVariable Long id) {
@@ -55,10 +51,6 @@ public class TodoController {
     // Create a new todo from the request body.
     // Response: 201 Created with the new TodoDto AND a Location header
     //           pointing to the new resource: /api/v1/todos/{id}
-    //
-    // Hint: ResponseEntity.created(location).body(created)
-    // Hint: URI location = uriBuilder.path("/api/v1/todos/{id}")
-    //                                .buildAndExpand(created.getId()).toUri();
     // -------------------------------------------------------------------------
     @PostMapping
     public ResponseEntity<TodoDto> createTodo(
@@ -72,8 +64,6 @@ public class TodoController {
     // -------------------------------------------------------------------------
     // Full update of a todo (replace non-null fields from request body).
     // Response: 200 OK with updated TodoDto, or 404 if not found
-    //
-    // Hint: ResponseEntity.ok(todoService.update(id, request))
     // -------------------------------------------------------------------------
     @PutMapping("/{id}")
     public ResponseEntity<TodoDto> updateTodo(
@@ -101,8 +91,6 @@ public class TodoController {
     // -------------------------------------------------------------------------
     // Delete a todo by id.
     // Response: 204 No Content (no body), or 404 if not found
-    //
-    // Hint: ResponseEntity.noContent().build()
     // -------------------------------------------------------------------------
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTodo(@PathVariable Long id) {
