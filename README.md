@@ -4,6 +4,8 @@
 > This is my implementation of the [REST API Principles workshop](https://github.com/codeclubcph/rest-api-principles), run by [Prosa (the Danish IT union)](https://www.prosa.dk/) in April 2026. 
 > The workshop covers building a production-style CRUD REST API with Java, Spring Boot, and PostgreSQL.
 
+---
+
 > A hands-on exercise to build a production-style REST API with Spring Boot 4 and Gradle.
 
 ---
