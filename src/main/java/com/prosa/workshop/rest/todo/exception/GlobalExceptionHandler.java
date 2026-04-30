@@ -49,7 +49,15 @@ public class GlobalExceptionHandler {
 
         log.error("Validation error", ex);
         final HttpStatus status = HttpStatus.BAD_REQUEST;
-        return ResponseEntity.status(status).body(new ErrorResponse(status.name(), errorMessage));
+        return ResponseEntity.status(status).body(new ErrorResponse("VALIDATION_ERROR", errorMessage));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException ex) {
+        log.error("Invalid argument provided", ex);
+        final HttpStatus status = HttpStatus.BAD_REQUEST;
+        return ResponseEntity.status(status)
+                .body(new ErrorResponse("INVALID_INPUT", ex.getMessage()));
     }
 
     // -------------------------------------------------------------------------
