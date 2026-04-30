@@ -3,6 +3,8 @@
 > [!NOTE] 
 > This is my implementation of the [REST API Principles workshop](https://github.com/codeclubcph/rest-api-principles), run by [Prosa (the Danish IT union)](https://www.prosa.dk/) in April 2026. 
 > The workshop covers building a production-style CRUD REST API with Java, Spring Boot, and PostgreSQL.
+> 
+> I added the use of [Bruno](https://www.usebruno.com/) instead of Postman.
 
 ---
 
