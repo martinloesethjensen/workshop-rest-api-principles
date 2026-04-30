@@ -60,7 +60,8 @@ public class TodoController {
             @PathVariable Long id,
             @Valid @RequestBody UpdateTodoRequest request
     ) {
-        return null; // TODO D: implement me
+        final TodoDto result = todoService.update(id, request);
+        return ResponseEntity.ok(result);
     }
 
     // -------------------------------------------------------------------------
