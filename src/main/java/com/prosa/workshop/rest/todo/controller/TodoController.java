@@ -40,7 +40,8 @@ public class TodoController {
     // -------------------------------------------------------------------------
     @GetMapping("/{id}")
     public ResponseEntity<TodoDto> getTodoById(@PathVariable Long id) {
-        return null; // TODO B: implement me
+        final TodoDto result = todoService.findById(id);
+        return ResponseEntity.ok(result);
     }
 
     // -------------------------------------------------------------------------

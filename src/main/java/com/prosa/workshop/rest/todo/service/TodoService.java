@@ -30,7 +30,8 @@ public class TodoService {
     public List<TodoDto> findAll(String status) {
         List<Todo> todos;
         if (status != null && !status.isEmpty()) {
-            todos = todoRepository.findByStatus(TodoStatus.valueOf(status.toUpperCase()));
+            final TodoStatus todoStatus = TodoStatus.valueOf(status.toUpperCase());
+            todos = todoRepository.findByStatus(todoStatus);
         } else {
             todos = todoRepository.findAll();
         }
@@ -47,7 +48,8 @@ public class TodoService {
     // Return the result mapped to a TodoDto.
     // -------------------------------------------------------------------------
     public TodoDto findById(Long id) {
-        throw new UnsupportedOperationException("TODO 2: implement findById");
+        Todo todo = todoRepository.findById(id).orElseThrow(() -> ResourceNotFoundException.forTodo(id));
+        return toDto(todo);
     }
 
     // -------------------------------------------------------------------------
