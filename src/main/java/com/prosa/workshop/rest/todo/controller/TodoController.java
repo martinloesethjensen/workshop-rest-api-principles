@@ -19,25 +19,13 @@ import java.util.List;
 public class TodoController {
 
     private final TodoService todoService;
-
-    // -------------------------------------------------------------------------
-    // TODO A — GET /api/v1/todos
-    // -------------------------------------------------------------------------
-    // Return all todos. Support optional filtering via ?status=OPEN|IN_PROGRESS|DONE
-    // Response: 200 OK with a list of TodoDto (empty list [] if none found)
-    // -------------------------------------------------------------------------
+    
     @GetMapping
     public ResponseEntity<List<TodoDto>> getAllTodos(@RequestParam(required = false) String status) {
         final List<TodoDto> result = todoService.findAll(status);
         return ResponseEntity.ok().body(result);
     }
 
-    // -------------------------------------------------------------------------
-    // TODO B — GET /api/v1/todos/{id}
-    // -------------------------------------------------------------------------
-    // Return a single todo by its id.
-    // Response: 200 OK with the TodoDto, or 404 if not found (handled globally)
-    // -------------------------------------------------------------------------
     @GetMapping("/{id}")
     public ResponseEntity<TodoDto> getTodoById(@PathVariable Long id) {
         final TodoDto result = todoService.findById(id);

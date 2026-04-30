@@ -20,13 +20,6 @@ public class TodoService {
 
     private final TodoRepository todoRepository;
 
-    // -------------------------------------------------------------------------
-    // TODO 1 — findAll
-    // -------------------------------------------------------------------------
-    // If `status` is not null, filter todos by that status.
-    // Otherwise return all todos.
-    // Map each Todo entity to a TodoDto using toDto().
-    // -------------------------------------------------------------------------
     public List<TodoDto> findAll(String status) {
         List<Todo> todos;
         if (status != null && !status.isEmpty()) {
@@ -41,12 +34,6 @@ public class TodoService {
         return todos.stream().map(this::toDto).toList();
     }
 
-    // -------------------------------------------------------------------------
-    // TODO 2 — findById
-    // -------------------------------------------------------------------------
-    // Find a Todo by id. If not found, throw ResourceNotFoundException.forTodo(id).
-    // Return the result mapped to a TodoDto.
-    // -------------------------------------------------------------------------
     public TodoDto findById(Long id) {
         Todo todo = todoRepository.findById(id).orElseThrow(() -> ResourceNotFoundException.forTodo(id));
         return toDto(todo);
