@@ -1,10 +1,15 @@
 package com.prosa.workshop.rest.todo.exception;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.List;
+
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -19,7 +24,8 @@ public class GlobalExceptionHandler {
     // -------------------------------------------------------------------------
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNotFound(ResourceNotFoundException ex) {
-        return null; // TODO G: implement me
+        final HttpStatus status = HttpStatus.NOT_FOUND;
+        return ResponseEntity.status(status).body(new ErrorResponse(status.name(), ex.getMessage()));
     }
 
     // -------------------------------------------------------------------------
@@ -34,7 +40,16 @@ public class GlobalExceptionHandler {
     // -------------------------------------------------------------------------
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException ex) {
-        return null; // TODO H: implement me
+        List<String> errorFields = ex.getBindingResult().getFieldErrors()
+                .stream()
+                .map((field) -> String.format("%s: %s", field.getField(), field.getDefaultMessage()))
+                .toList();
+
+        final String errorMessage = String.join(", ", errorFields);
+
+        log.error("Validation error", ex);
+        final HttpStatus status = HttpStatus.BAD_REQUEST;
+        return ResponseEntity.status(status).body(new ErrorResponse(status.name(), errorMessage));
     }
 
     // -------------------------------------------------------------------------
@@ -51,6 +66,8 @@ public class GlobalExceptionHandler {
     // -------------------------------------------------------------------------
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneric(Exception ex) {
-        return null; // TODO I: implement me
+        log.error("Unexpected error", ex);
+        final HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        return ResponseEntity.status(status).body(new ErrorResponse(status.name(), "Unknown error"));
     }
 }
