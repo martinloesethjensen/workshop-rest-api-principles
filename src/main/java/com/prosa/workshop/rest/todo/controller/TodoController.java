@@ -28,7 +28,8 @@ public class TodoController {
     // -------------------------------------------------------------------------
     @GetMapping
     public ResponseEntity<List<TodoDto>> getAllTodos(@RequestParam(required = false) String status) {
-        return null; // TODO A: implement me
+        final List<TodoDto> result = todoService.findAll(status);
+        return ResponseEntity.ok().body(result);
     }
 
     // -------------------------------------------------------------------------

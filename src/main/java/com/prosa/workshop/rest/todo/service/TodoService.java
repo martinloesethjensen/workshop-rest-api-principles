@@ -3,6 +3,7 @@ package com.prosa.workshop.rest.todo.service;
 import com.prosa.workshop.rest.todo.dto.CreateTodoRequest;
 import com.prosa.workshop.rest.todo.dto.TodoDto;
 import com.prosa.workshop.rest.todo.dto.UpdateTodoRequest;
+import com.prosa.workshop.rest.todo.exception.ResourceNotFoundException;
 import com.prosa.workshop.rest.todo.model.Todo;
 import com.prosa.workshop.rest.todo.model.TodoStatus;
 import com.prosa.workshop.rest.todo.repository.TodoRepository;
@@ -27,7 +28,17 @@ public class TodoService {
     // Map each Todo entity to a TodoDto using toDto().
     // -------------------------------------------------------------------------
     public List<TodoDto> findAll(String status) {
-        throw new UnsupportedOperationException("TODO 1: implement findAll");
+        List<TodoDto> todos;
+        if (status != null && !status.isEmpty()) {
+            todos = todoRepository.findByStatus(TodoStatus.valueOf(status.toUpperCase()))
+                    .stream().map(this::toDto).toList();
+        } else {
+            todos = todoRepository.findAll().stream().map(this::toDto).toList();
+        }
+        if (todos.isEmpty()) {
+            throw new ResourceNotFoundException("No todos found");
+        }
+        return todos;
     }
 
     // -------------------------------------------------------------------------
