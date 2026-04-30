@@ -76,7 +76,8 @@ public class TodoController {
             @PathVariable Long id,
             @RequestParam TodoStatus status
     ) {
-        return null; // TODO E: implement me
+        final TodoDto result = todoService.updateStatus(id, status);
+        return ResponseEntity.ok(result);
     }
 
     // -------------------------------------------------------------------------

@@ -50,7 +50,7 @@ public class TodoService {
                 .build();
         return toDto(todoRepository.save(todo));
     }
-    
+
     @Transactional
     public TodoDto update(Long id, UpdateTodoRequest request) {
         Todo todo = todoRepository.findById(id).orElseThrow(() -> ResourceNotFoundException.forTodo(id));
@@ -69,7 +69,9 @@ public class TodoService {
     // -------------------------------------------------------------------------
     @Transactional
     public TodoDto updateStatus(Long id, TodoStatus newStatus) {
-        throw new UnsupportedOperationException("TODO 5: implement updateStatus");
+        Todo todo = todoRepository.findById(id).orElseThrow(() -> ResourceNotFoundException.forTodo(id));
+        if (todo.getStatus() != newStatus) todo.setStatus(newStatus);
+        return toDto(todoRepository.save(todo));
     }
 
     // -------------------------------------------------------------------------
