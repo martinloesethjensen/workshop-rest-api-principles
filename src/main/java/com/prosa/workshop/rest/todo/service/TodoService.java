@@ -6,6 +6,7 @@ import com.prosa.workshop.rest.todo.dto.UpdateTodoRequest;
 import com.prosa.workshop.rest.todo.model.Todo;
 import com.prosa.workshop.rest.todo.model.TodoStatus;
 import com.prosa.workshop.rest.todo.repository.TodoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,13 +14,10 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class TodoService {
 
     private final TodoRepository todoRepository;
-
-    public TodoService(TodoRepository todoRepository) {
-        this.todoRepository = todoRepository;
-    }
 
     // -------------------------------------------------------------------------
     // TODO 1 — findAll

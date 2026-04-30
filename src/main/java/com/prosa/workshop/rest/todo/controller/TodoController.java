@@ -6,6 +6,7 @@ import com.prosa.workshop.rest.todo.dto.UpdateTodoRequest;
 import com.prosa.workshop.rest.todo.model.TodoStatus;
 import com.prosa.workshop.rest.todo.service.TodoService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -14,13 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/todos")
+@RequiredArgsConstructor
 public class TodoController {
 
     private final TodoService todoService;
-
-    public TodoController(TodoService todoService) {
-        this.todoService = todoService;
-    }
 
     // -------------------------------------------------------------------------
     // TODO A — GET /api/v1/todos
