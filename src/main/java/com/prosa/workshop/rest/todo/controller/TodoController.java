@@ -32,13 +32,6 @@ public class TodoController {
         return ResponseEntity.ok(result);
     }
 
-    // -------------------------------------------------------------------------
-    // TODO C — POST /api/v1/todos
-    // -------------------------------------------------------------------------
-    // Create a new todo from the request body.
-    // Response: 201 Created with the new TodoDto AND a Location header
-    //           pointing to the new resource: /api/v1/todos/{id}
-    // -------------------------------------------------------------------------
     @PostMapping
     public ResponseEntity<TodoDto> createTodo(
             @Valid @RequestBody CreateTodoRequest request,
@@ -49,12 +42,6 @@ public class TodoController {
         return ResponseEntity.created(location).body(created);
     }
 
-    // -------------------------------------------------------------------------
-    // TODO D — PUT /api/v1/todos/{id}
-    // -------------------------------------------------------------------------
-    // Full update of a todo (replace non-null fields from request body).
-    // Response: 200 OK with updated TodoDto, or 404 if not found
-    // -------------------------------------------------------------------------
     @PutMapping("/{id}")
     public ResponseEntity<TodoDto> updateTodo(
             @PathVariable Long id,
@@ -64,13 +51,6 @@ public class TodoController {
         return ResponseEntity.ok(result);
     }
 
-    // -------------------------------------------------------------------------
-    // TODO E — PATCH /api/v1/todos/{id}/status
-    // -------------------------------------------------------------------------
-    // Update the status of a todo only.
-    // Example: PATCH /api/v1/todos/1/status?status=IN_PROGRESS
-    // Response: 200 OK with updated TodoDto, or 404 if not found
-    // -------------------------------------------------------------------------
     @PatchMapping("/{id}/status")
     public ResponseEntity<TodoDto> updateStatus(
             @PathVariable Long id,
@@ -80,14 +60,9 @@ public class TodoController {
         return ResponseEntity.ok(result);
     }
 
-    // -------------------------------------------------------------------------
-    // TODO F — DELETE /api/v1/todos/{id}
-    // -------------------------------------------------------------------------
-    // Delete a todo by id.
-    // Response: 204 No Content (no body), or 404 if not found
-    // -------------------------------------------------------------------------
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTodo(@PathVariable Long id) {
-        return null; // TODO F: implement me
+        todoService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
