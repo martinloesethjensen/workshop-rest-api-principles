@@ -19,7 +19,7 @@ import java.util.List;
 public class TodoController {
 
     private final TodoService todoService;
-    
+
     @GetMapping
     public ResponseEntity<List<TodoDto>> getAllTodos(@RequestParam(required = false) String status) {
         final List<TodoDto> result = todoService.findAll(status);
@@ -44,7 +44,9 @@ public class TodoController {
             @Valid @RequestBody CreateTodoRequest request,
             UriComponentsBuilder uriBuilder
     ) {
-        return null; // TODO C: implement me
+        final TodoDto created = todoService.create(request);
+        var location = uriBuilder.path("/api/v1/todos/{id}").buildAndExpand(created.getId()).toUri();
+        return ResponseEntity.created(location).body(created);
     }
 
     // -------------------------------------------------------------------------
