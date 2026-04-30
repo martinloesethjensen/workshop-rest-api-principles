@@ -28,17 +28,16 @@ public class TodoService {
     // Map each Todo entity to a TodoDto using toDto().
     // -------------------------------------------------------------------------
     public List<TodoDto> findAll(String status) {
-        List<TodoDto> todos;
+        List<Todo> todos;
         if (status != null && !status.isEmpty()) {
-            todos = todoRepository.findByStatus(TodoStatus.valueOf(status.toUpperCase()))
-                    .stream().map(this::toDto).toList();
+            todos = todoRepository.findByStatus(TodoStatus.valueOf(status.toUpperCase()));
         } else {
-            todos = todoRepository.findAll().stream().map(this::toDto).toList();
+            todos = todoRepository.findAll();
         }
         if (todos.isEmpty()) {
             throw new ResourceNotFoundException("No todos found");
         }
-        return todos;
+        return todos.stream().map(this::toDto).toList();
     }
 
     // -------------------------------------------------------------------------
