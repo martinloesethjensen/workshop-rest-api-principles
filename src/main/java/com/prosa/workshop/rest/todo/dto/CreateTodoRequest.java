@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 @Data
 public class CreateTodoRequest {
-
     @NotBlank(message = "Title is required")
     @Size(max = 255, message = "Title must be at most 255 characters")
     private String title;

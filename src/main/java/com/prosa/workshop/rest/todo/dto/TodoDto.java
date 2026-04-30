@@ -14,5 +14,6 @@ public class TodoDto {
     private String description;
     private String status;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private LocalDateTime dueDate;
 }

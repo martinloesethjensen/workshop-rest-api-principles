@@ -92,6 +92,7 @@ public class TodoService {
                 .description(todo.getDescription())
                 .status(todo.getStatus().name())
                 .createdAt(todo.getCreatedAt())
+                .updatedAt(todo.getUpdatedAt())
                 .dueDate(todo.getDueDate())
                 .build();
     }

@@ -27,8 +27,7 @@ public class TodoController {
     // Response: 200 OK with a list of TodoDto (empty list [] if none found)
     // -------------------------------------------------------------------------
     @GetMapping
-    public ResponseEntity<List<TodoDto>> getAllTodos(
-            @RequestParam(required = false) String status) {
+    public ResponseEntity<List<TodoDto>> getAllTodos(@RequestParam(required = false) String status) {
         return null; // TODO A: implement me
     }
 
@@ -53,7 +52,8 @@ public class TodoController {
     @PostMapping
     public ResponseEntity<TodoDto> createTodo(
             @Valid @RequestBody CreateTodoRequest request,
-            UriComponentsBuilder uriBuilder) {
+            UriComponentsBuilder uriBuilder
+    ) {
         return null; // TODO C: implement me
     }
 
@@ -66,7 +66,8 @@ public class TodoController {
     @PutMapping("/{id}")
     public ResponseEntity<TodoDto> updateTodo(
             @PathVariable Long id,
-            @Valid @RequestBody UpdateTodoRequest request) {
+            @Valid @RequestBody UpdateTodoRequest request
+    ) {
         return null; // TODO D: implement me
     }
 
@@ -80,7 +81,8 @@ public class TodoController {
     @PatchMapping("/{id}/status")
     public ResponseEntity<TodoDto> updateStatus(
             @PathVariable Long id,
-            @RequestParam TodoStatus status) {
+            @RequestParam TodoStatus status
+    ) {
         return null; // TODO E: implement me
     }
 

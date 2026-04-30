@@ -24,14 +24,18 @@ public class Todo {
 
     private String description;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    @Builder.Default
     private TodoStatus status = TodoStatus.OPEN;
 
-    @Column(nullable = false, updatable = false)
     @Builder.Default
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Builder.Default
+    @Column(nullable = false)
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     private LocalDateTime dueDate;
 }
