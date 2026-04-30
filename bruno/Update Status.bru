@@ -1,0 +1,19 @@
+meta {
+  name: "Update Status"
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{baseUrl}}/todos/1/status?status=DONE
+  body: none
+  auth: none
+}
+
+params:query {
+  status: DONE
+}
+
+vars:pre-request {
+  baseUrl: http://localhost:8080/api/v1
+}

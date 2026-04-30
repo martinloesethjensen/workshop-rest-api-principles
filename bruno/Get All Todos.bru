@@ -1,0 +1,19 @@
+meta {
+  name: "Get All Todos"
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/todos
+  body: none
+  auth: none
+}
+
+params:query {
+  ~status: OPEN
+}
+
+vars:pre-request {
+  baseUrl: http://localhost:8080/api/v1
+}
