@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{baseUrl}}/todos
+  url: {{baseUrl}}/{{version}}/todos
   body: json
   auth: none
 }
@@ -16,8 +16,4 @@ body:json {
     "description": "Complete the workshop exercises",
     "dueDate": "2026-12-31T23:59:59"
   }
-}
-
-vars:pre-request {
-  baseUrl: http://localhost:8080/api/v1
 }

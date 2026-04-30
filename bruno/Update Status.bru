@@ -5,15 +5,11 @@ meta {
 }
 
 patch {
-  url: {{baseUrl}}/todos/1/status?status=DONE
+  url: {{baseUrl}}/{{version}}/todos/2/status?status=DONE
   body: none
   auth: none
 }
 
 params:query {
   status: DONE
-}
-
-vars:pre-request {
-  baseUrl: http://localhost:8080/api/v1
 }
