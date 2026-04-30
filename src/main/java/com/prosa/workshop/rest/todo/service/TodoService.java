@@ -29,9 +29,6 @@ public class TodoService {
         } else {
             todos = todoRepository.findAll();
         }
-        if (todos.isEmpty()) {
-            throw new ResourceNotFoundException("No todos found");
-        }
         return todos.stream().map(this::toDto).toList();
     }
 
@@ -65,7 +62,10 @@ public class TodoService {
     @Transactional
     public TodoDto updateStatus(Long id, TodoStatus newStatus) {
         Todo todo = todoRepository.findById(id).orElseThrow(() -> ResourceNotFoundException.forTodo(id));
-        if (todo.getStatus() != newStatus) todo.setStatus(newStatus);
+        if (todo.getStatus() != newStatus) {
+            todo.setStatus(newStatus);
+            todo.setUpdatedAt(LocalDateTime.now());
+        }
         return toDto(todoRepository.save(todo));
     }
 
